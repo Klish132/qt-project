@@ -14,7 +14,7 @@ AuthManager::AuthManager(QObject *parent) : QObject(parent)
 
 void AuthManager::authentificate(const QString &login, const QString &password)
 {
-    QUrl url("http://127.0.0.1:53552/auth");
+    QUrl url("http://127.0.0.1:58721/auth");
 
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
@@ -30,13 +30,13 @@ void AuthManager::authentificate(const QString &login, const QString &password)
     connect(reply, &QNetworkReply::finished,
             [this, reply](){
         if (reply->error() != QNetworkReply::NoError) {
-            this->authError = reply->errorString();
+            authError = reply->errorString();
         } else {
             QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
             QString token = obj.value("token").toString();
             this->token = token;
         }
-        this->onAuthFinished();
+        onAuthFinished();
         reply->deleteLater();
 
     });
@@ -45,18 +45,21 @@ void AuthManager::authentificate(const QString &login, const QString &password)
 
 void AuthManager::onAuthFinished()
 {
-    qDebug() << "Auth error: " << this->authError;
-    qDebug() << "Token: " << this->getToken();
-    emit regRequestCompleted(this->authError);
+    //qDebug() << "Auth error: " << getAuthError();
+    //qDebug() << "Token: " << getToken();
+    emit regRequestCompleted(getAuthError());
 }
 
 QString AuthManager::getToken() {
     return this->token;
 }
+QString AuthManager::getAuthError() {
+    return this->authError;
+}
 
 void AuthManager::registerer(const QString &login, const QString &password)
 {
-    QUrl url("http://127.0.0.1:53552/register");
+    QUrl url("http://127.0.0.1:58721/register");
 
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
@@ -72,9 +75,9 @@ void AuthManager::registerer(const QString &login, const QString &password)
     connect(reply, &QNetworkReply::finished,
             [this, reply](){
         if (reply->error() != QNetworkReply::NoError) {
-            this->registerError = reply->errorString();
+            registerError = reply->errorString();
         }
-        this->onRegFinished();
+        onRegFinished();
         reply->deleteLater();
 
     });
@@ -82,8 +85,12 @@ void AuthManager::registerer(const QString &login, const QString &password)
 
 void AuthManager::onRegFinished()
 {
-    qDebug() << "Register error: " << this->registerError;
-    emit regRequestCompleted(this->registerError);
+    //qDebug() << "Register error: " << getRegisterError();
+    emit regRequestCompleted(getRegisterError());
+}
+
+QString AuthManager::getRegisterError() {
+    return this->registerError;
 }
 
 
