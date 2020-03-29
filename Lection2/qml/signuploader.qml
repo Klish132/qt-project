@@ -6,9 +6,9 @@ Item {
     id: signUpLoader
     visible: true
 
-    // Sign in top text
+    // Sign up top text
     Text {
-        id: titleTextLogin
+        id: signUpTitleText
         text: "SIGN UP"
         color: "#404040"
         font.pixelSize: 25
@@ -19,35 +19,34 @@ Item {
     // Sign up fields column
     Column {
         id: signUpColumn
-        anchors.top: titleTextLogin.bottom
+        anchors.top: signUpTitleText.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 10
-        visible: !instance
         // Login field
         TextField {
-            id: signUpField1
+            id: loginTextField
             width: window.width - 20
             font.pixelSize: 16
             placeholderText: "Login"
         }
         // Password field
         TextField {
-            id: signUpField2
+            id: passwordTextField
             width: window.width - 20
             font.pixelSize: 16
             placeholderText: "Password"
         }
         // Repeat pasword field
         TextField {
-            id: signUpField3
+            id: repeatPasswordTextField
             width: window.width - 20
             font.pixelSize: 16
             placeholderText: "Repeat password"
         }
         // Nickname field
         TextField {
-            id: signUpField4
+            id: nicknameTextField
             width: window.width - 20
             font.pixelSize: 16
             placeholderText: "Nickname"
@@ -57,7 +56,7 @@ Item {
             id: signUpButton
             text: "Sign up"
             anchors.horizontalCenter: parent.horizontalCenter
-            enabled: signUpField1.length >= 5 && signUpField2.length >= 5 && signUpField3.length >= 5 && signUpField4.length >= 5
+            enabled: loginTextField.length >= 5 && passwordTextField.length >= 5 && repeatPasswordTextField.length >= 5 && nicknameTextField.length >= 5
             onClicked: {
                 loadingIndicatorOpacity.start()
             }

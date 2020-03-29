@@ -9,32 +9,35 @@ Window {
     width: 280
     height: 500
     title: "Authorization"
-    property int instance: 1
+    property int currentWindowState: 1 // 1 == Sign in state / 2 == Sign up state
 
+    // Window state loader
     Loader {
-        id: authLoader
+        id: windowStateLoader
         anchors.fill: parent
-        anchors.top: top
+        anchors.top: parent.top
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        source: (window.instance == 1) ? "qml/signinloader.qml" : "qml/signuploader.qml"
+        source: (window.currentWindowState == 1)
+                ? "qml/signinloader.qml"
+                : "qml/signuploader.qml"
     }
 
     // Bottom row
     Row {
-        id: promptRow
+        id: bottomPromptRow
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 10
         // Sign in prompt button
         Prompt {
-            id:sIP
-            enabled: !instance
+            id:signInPrompt
+            enabled: !currentWindowState
             text: "Sign in"
-            font.underline: instance
+            font.underline: currentWindowState
             onClicked: {
-                window.instance = 1
+                window.currentWindowState = 1
             }
         }
         Text {
@@ -45,12 +48,12 @@ Window {
         }
         // Sign up prompt button
         Prompt {
-            id:sUP
-            enabled: instance
+            id:signUpPrompt
+            enabled: currentWindowState
             text: "Sign up"
-            font.underline: !instance
+            font.underline: !currentWindowState
             onClicked: {
-                window.instance = 0
+                window.currentWindowState = 0
             }
         }
     }

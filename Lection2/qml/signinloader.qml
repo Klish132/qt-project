@@ -3,12 +3,12 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.5
 
 Item {
-    id: signInItem
+    id: signInLoader
     visible: true
 
     // Sign in top text
     Text {
-        id: titleTextLogin
+        id: signInTitleText
         text: "SIGN IN"
         color: "#404040"
         font.pixelSize: 25
@@ -19,21 +19,20 @@ Item {
     // Sign in fields column
     Column {
         id: signInColumn
-        anchors.top: titleTextLogin.bottom
+        anchors.top: signInTitleText.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 10
-        visible: instance
         // Login field
         TextField {
-            id: signInField1
+            id: loginTextField
             width: window.width - 20
             font.pixelSize: 16
             placeholderText: "Login"
         }
         // Password field
         TextField {
-            id: signInField2
+            id: passwordTextField
             width: window.width - 20
             font.pixelSize: 16
             placeholderText: "Password"
@@ -43,7 +42,7 @@ Item {
             id: signInButton
             text: "Sign in"
             anchors.horizontalCenter: parent.horizontalCenter
-            enabled: signInField1.length >= 5 && signInField2.length >= 5
+            enabled: loginTextField.length >= 5 && passwordTextField.length >= 5
             onClicked: {
                 loadingIndicatorOpacity.start()
             }

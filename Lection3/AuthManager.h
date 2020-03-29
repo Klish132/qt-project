@@ -19,23 +19,21 @@ public:
                         const QString &password);
 
     QString getToken();
-    QString getRegisterError();
     QString getAuthError();
+    QString getRegisterError();
+    void resetState();
 
 private slots:
-    void onRegFinished();
-    void onAuthFinished();
 
 signals:
     void regRequestCompleted(QString);
-    void authRequestCompleted(QString);
-
+    void authRequestCompleted(QString, QString);
 
 private:
     QNetworkAccessManager _net;
-    QString token;
-    QString authError;
     QString registerError;
+    QString authError;
+    QString token;
 
 };
 
