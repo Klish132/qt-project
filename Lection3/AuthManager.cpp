@@ -12,7 +12,6 @@ AuthManager::AuthManager(QObject *parent) : QObject(parent)
 
 }
 
-
 void AuthManager::authentificate(const QString &login, const QString &password)
 {
     QUrl url("http://127.0.0.1:58721/auth");
@@ -34,9 +33,7 @@ void AuthManager::authentificate(const QString &login, const QString &password)
         QString token = obj.value("token").toString();;
         emit authRequestCompleted(reply->errorString(), token);
         reply->deleteLater();
-
     });
-
 }
 
 void AuthManager::registerer(const QString &login, const QString &password)
