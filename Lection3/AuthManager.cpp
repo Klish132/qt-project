@@ -15,12 +15,6 @@ AuthManager::AuthManager(QObject *parent) : QObject(parent)
 QString AuthManager::getToken() {
     return this->token;
 }
-QString AuthManager::getAuthError() {
-    return this->authError;
-}
-QString AuthManager::getRegisterError() {
-    return this->registerError;
-}
 void AuthManager::resetState() {
     this->token = "";
     this->authError = "";
@@ -47,7 +41,7 @@ void AuthManager::authentificate(const QString &login, const QString &password)
         QString errorMsg = reply->errorString();
         QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
         this->token = obj.value("token").toString();
-        emit authRequestCompleted(getAuthError(), this->token);
+        emit authRequestCompleted(reply->errorString(), this->token);
         reply->deleteLater();
 
     });

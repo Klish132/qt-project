@@ -19,11 +19,7 @@ public:
                         const QString &password);
 
     QString getToken();
-    QString getAuthError();
-    QString getRegisterError();
     void resetState();
-
-private slots:
 
 signals:
     void regRequestCompleted(QString);
