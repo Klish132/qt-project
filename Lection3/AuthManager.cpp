@@ -12,13 +12,8 @@ AuthManager::AuthManager(QObject *parent) : QObject(parent)
 
 }
 
-QString AuthManager::getToken() {
-    return this->token;
-}
 void AuthManager::resetState() {
     this->token = "";
-    this->authError = "";
-    this->registerError = "";
 }
 
 void AuthManager::authentificate(const QString &login, const QString &password)

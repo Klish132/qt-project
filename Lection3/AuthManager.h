@@ -18,17 +18,13 @@ public:
     void registerer(const QString &login,
                         const QString &password);
 
-    QString getToken();
-    void resetState();
-
 signals:
     void regRequestCompleted(QString);
     void authRequestCompleted(QString, QString);
 
 private:
+    void resetState();
     QNetworkAccessManager _net;
-    QString registerError;
-    QString authError;
     QString token;
 
 };
