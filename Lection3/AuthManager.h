@@ -23,10 +23,7 @@ signals:
     void authRequestCompleted(QString, QString);
 
 private:
-    void resetState();
     QNetworkAccessManager _net;
-    QString token;
-
 };
 
 #endif // AUTHMANAGER_H
