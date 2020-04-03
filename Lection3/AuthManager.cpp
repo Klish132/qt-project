@@ -12,13 +12,9 @@ AuthManager::AuthManager(QObject *parent) : QObject(parent)
 
 }
 
-void AuthManager::resetState() {
-    this->token = "";
-}
 
 void AuthManager::authentificate(const QString &login, const QString &password)
 {
-    resetState();
     QUrl url("http://127.0.0.1:58721/auth");
 
     QNetworkRequest request(url);
@@ -35,8 +31,8 @@ void AuthManager::authentificate(const QString &login, const QString &password)
             [this, reply](){
         QString errorMsg = reply->errorString();
         QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
-        this->token = obj.value("token").toString();
-        emit authRequestCompleted(reply->errorString(), this->token);
+        QString token = obj.value("token").toString();;
+        emit authRequestCompleted(reply->errorString(), token);
         reply->deleteLater();
 
     });
@@ -45,7 +41,6 @@ void AuthManager::authentificate(const QString &login, const QString &password)
 
 void AuthManager::registerer(const QString &login, const QString &password)
 {
-    resetState();
     QUrl url("http://127.0.0.1:58721/register");
 
     QNetworkRequest request(url);
