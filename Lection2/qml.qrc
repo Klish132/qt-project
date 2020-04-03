@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qml/signinloader.qml</file>
+        <file>qml/signuploader.qml</file>
+        <file>qml/Prompt.qml</file>
+    </qresource>
+</RCC>
