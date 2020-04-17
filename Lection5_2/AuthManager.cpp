@@ -78,7 +78,6 @@ void AuthManager::setAuthProcessing(bool value)
         return;
     m_isAuthProcessing = value;
     emit authProcessingChanged(value);
-    qDebug() << "isAuthProcessing: " << m_isAuthProcessing;
 }
 
 void AuthManager::setRegProcessing(bool value)
@@ -87,5 +86,4 @@ void AuthManager::setRegProcessing(bool value)
         return;
     m_isRegProcessing = value;
     emit regProcessingChanged(value);
-    qDebug() << "isRegProcessing: " << m_isRegProcessing;
 }
